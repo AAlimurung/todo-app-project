@@ -110,6 +110,12 @@ if(savedTasks){
 }
 
 const API_URL = 'https://jsonplaceholder.typicode.com/todos'
+let idCounter = 1000;
+
+// const savedId = localStorage.getItem('idCounter');
+// if(savedId){
+//   idCounter = parseInt(savedId)
+// }
 
 /*
 * GET part of the criteria using the todos in typicode
@@ -135,10 +141,11 @@ async function addTask() : Promise<void> {
 
     const newTask: Task & { isEditing: boolean } = {
       ...res.data,
+      id: idCounter++,
       isEditing: false
     }
 
-    tasks.value.unshift(res.data)
+    // tasks.value.unshift(res.data)
     newTasks.value.unshift(newTask)
     localStorage.setItem('newTasks', JSON.stringify(newTasks.value))
 
